@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meliza Choc | Traductora Jurada e Intérprete</title>
+<meta name="description" content="Meliza R. Choc Montes — Traductora jurada e intérprete en Guatemala. Traducción jurada, técnica, revisión y edición, e interpretación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon: #8A2C49;
+    --maroon-deep: #631F35;
+    --olive: #A79B6E;
+    --cream: #FBF3EA;
+    --paper: #FFFFFF;
+    --ink: #2B2420;
+    --ink-soft: #6B615A;
+    --line: #E6DACB;
+    --radius: 3px;
+    --wrap: 1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    font-size:16px;
+  }
+  h1,h2,h3,.serif{font-family:'Playfair Display', serif;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(251,243,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--wrap); margin:0 auto; padding:18px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{font-family:'Playfair Display', serif; font-weight:600; font-size:1.25rem; color:var(--maroon-deep); letter-spacing:0.01em;}
+  .brand span{color:var(--ink);}
+  nav.links{display:flex; gap:34px; font-size:0.95rem; color:var(--ink-soft);}
+  nav.links a:hover{color:var(--maroon);}
+  .nav-cta{
+    background:var(--maroon); color:var(--cream); padding:10px 20px;
+    border-radius:var(--radius); font-size:0.9rem; font-weight:500;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--maroon-deep); color:var(--cream);}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
+  .burger span{width:24px; height:2px; background:var(--ink);}
+  @media (max-width:860px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); flex-direction:column; gap:0;
+      max-height:0; overflow:hidden; transition:max-height .25s ease;
+      border-bottom:1px solid var(--line);
+    }
+    nav.links.open{max-height:260px;}
+    nav.links a{padding:14px 28px; border-top:1px solid var(--line);}
+    .burger{display:flex;}
+    .nav-cta{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 70px;}
+  .hero .wrap{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
+  }
+  @media (max-width:860px){ .hero .wrap{grid-template-columns:1fr; text-align:center;} }
+  .hero h1{
+    font-size:clamp(2.1rem, 4vw, 3.1rem);
+    font-weight:600; line-height:1.15; color:var(--ink);
+    max-width:15ch;
+  }
+  @media (max-width:860px){ .hero h1{max-width:none; margin:0 auto;} }
+  .hero p.lede{
+    margin-top:22px; font-size:1.08rem; color:var(--ink-soft); max-width:46ch;
+  }
+  @media (max-width:860px){ .hero p.lede{margin-left:auto; margin-right:auto;} }
+  .hero .cta-row{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;}
+  @media (max-width:860px){ .hero .cta-row{justify-content:center;} }
+  .btn{
+    display:inline-block; padding:13px 26px; border-radius:var(--radius);
+    font-size:0.95rem; font-weight:500; border:1px solid transparent;
+  }
+  .btn-primary{background:var(--maroon); color:var(--cream);}
+  .btn-primary:hover{background:var(--maroon-deep);}
+  .btn-ghost{border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--maroon); color:var(--maroon);}
+
+  /* The seal — the one bold, memorable element */
+  .seal-wrap{display:flex; justify-content:center;}
+  .seal{width:min(300px, 78vw); height:auto;}
+  .seal .ring{fill:none; stroke:var(--maroon); stroke-width:2;}
+  .seal .ring-inner{fill:none; stroke:var(--olive); stroke-width:1;}
+  .seal text{
+    font-family:'Playfair Display', serif; fill:var(--maroon-deep);
+    font-size:11.5px; letter-spacing:2.2px;
+  }
+  .seal .center-word{font-size:15px; font-weight:600;}
+  .seal .center-sub{font-family:'Inter',sans-serif; font-size:8.5px; letter-spacing:1.5px; fill:var(--ink-soft);}
+  .seal .star{fill:var(--olive);}
+
+  /* ---------- SERVICIOS ---------- */
+  .servicios{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .servicios h2{font-size:1.9rem; max-width:20ch;}
+  .servicios .intro{color:var(--ink-soft); max-width:56ch; margin-top:14px;}
+  .service-list{margin-top:48px; display:grid; grid-template-columns:repeat(2,1fr); gap:0;}
+  @media (max-width:720px){ .service-list{grid-template-columns:1fr;} }
+  .service-item{
+    position:relative; padding:30px 28px 30px 34px;
+    border-top:1px solid var(--line);
+  }
+  .service-item::before{
+    content:""; position:absolute; left:0; top:30px; bottom:30px; width:3px;
+    background:var(--maroon);
+  }
+  .service-item h3{font-size:1.15rem; font-weight:600; color:var(--maroon-deep);}
+  .service-item p{margin-top:8px; color:var(--ink-soft); font-size:0.96rem; max-width:38ch;}
+
+  /* ---------- SOBRE MÍ ---------- */
+  .about .wrap{display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:start;}
+  @media (max-width:860px){ .about .wrap{grid-template-columns:1fr;} }
+  .about-photo{
+    border:1px solid var(--line); padding:12px; background:var(--paper);
+  }
+  .about-photo img{ filter:saturate(1.02); }
+  .about h2{font-size:1.9rem;}
+  .about p{margin-top:18px; color:var(--ink-soft); max-width:60ch;}
+  .about-facts{margin-top:30px; display:grid; grid-template-columns:repeat(2,1fr); gap:18px 30px;}
+  @media (max-width:480px){ .about-facts{grid-template-columns:1fr;} }
+  .about-facts dt{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--olive); font-weight:600;}
+  .about-facts dd{margin-top:4px; font-size:0.98rem; color:var(--ink);}
+
+  /* ---------- PORTAFOLIO ---------- */
+  .portafolio{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .portafolio h2{font-size:1.9rem;}
+  .portafolio .intro{color:var(--ink-soft); max-width:60ch; margin-top:14px;}
+  .doc-grid{margin-top:46px; display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:860px){ .doc-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .doc-grid{grid-template-columns:1fr;} }
+  .doc-card{
+    background:var(--cream); border:1px solid var(--line);
+    padding:26px 20px; text-align:left;
+  }
+  .doc-card svg{width:30px; height:30px; stroke:var(--maroon);}
+  .doc-card h4{margin-top:16px; font-size:1rem; font-weight:600; color:var(--ink);}
+  .doc-card p{margin-top:6px; font-size:0.86rem; color:var(--ink-soft);}
+  .confid-note{
+    margin-top:34px; font-size:0.9rem; color:var(--ink-soft);
+    border-left:3px solid var(--olive); padding-left:16px;
+  }
+
+  /* ---------- CURRÍCULUM ---------- */
+  .cv h2{font-size:1.9rem;}
+  .cv-grid{margin-top:48px; display:grid; grid-template-columns:1.3fr 1fr; gap:60px;}
+  @media (max-width:860px){ .cv-grid{grid-template-columns:1fr;} }
+  .timeline{border-left:1px solid var(--line); padding-left:30px;}
+  .tl-item{position:relative; padding-bottom:38px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-35px; top:4px;
+    width:9px; height:9px; border-radius:50%; background:var(--maroon);
+  }
+  .tl-year{font-size:0.82rem; color:var(--olive); font-weight:600; letter-spacing:0.03em;}
+  .tl-item h3{margin-top:4px; font-size:1.08rem; font-weight:600;}
+  .tl-item p{margin-top:6px; color:var(--ink-soft); font-size:0.95rem; max-width:44ch;}
+  .skills h3{font-size:1.05rem; font-weight:600; color:var(--maroon-deep); margin-bottom:14px;}
+  .skill-block{margin-bottom:26px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .tag{
+    font-size:0.82rem; padding:6px 13px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink-soft);
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contacto{background:var(--maroon-deep); color:var(--cream);}
+  .contacto h2{color:var(--cream); font-size:1.9rem;}
+  .contacto .intro{color:#E7C9D2; max-width:52ch; margin-top:14px;}
+  .contact-grid{margin-top:48px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px;}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-list{list-style:none;}
+  .contact-list li{padding:16px 0; border-top:1px solid rgba(255,255,255,0.18);}
+  .contact-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.18);}
+  .contact-list .label{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--olive);}
+  .contact-list .value{margin-top:4px; font-size:1.05rem;}
+  .contact-list a:hover{color:var(--olive);}
+  form.contact-form{display:grid; gap:16px;}
+  .contact-form label{font-size:0.82rem; color:#E7C9D2; display:block; margin-bottom:6px;}
+  .contact-form input, .contact-form textarea{
+    width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.25);
+    color:var(--cream); padding:12px 14px; font-family:inherit; font-size:0.95rem; border-radius:var(--radius);
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{color:rgba(255,255,255,0.45);}
+  .contact-form textarea{min-height:110px; resize:vertical;}
+  .contact-form button{
+    justify-self:start; background:var(--cream); color:var(--maroon-deep);
+    padding:13px 28px; border:none; font-weight:600; border-radius:var(--radius); cursor:pointer; font-size:0.95rem;
+  }
+  .contact-form button:hover{background:var(--olive); color:var(--maroon-deep);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 0; text-align:center; font-size:0.85rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Meliza <span>Choc</span></a>
+    <nav class="links" id="navLinks">
+      <a href="#sobre-mi">Acerca de</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#curriculum">Currículum</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/50241108457" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Traducción jurada e interpretación con precisión y respaldo legal.</h1>
+        <p class="lede">Acompaño a profesionales del derecho, instituciones y particulares en Guatemala con traducciones juradas, técnicas y servicios de interpretación en los que cada palabra importa.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contacto">Solicitar una cotización</a>
+          <a class="btn btn-ghost" href="#portafolio">Ver mi trabajo</a>
+        </div>
+      </div>
+      <div class="seal-wrap">
+        <svg class="seal" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <circle class="ring" cx="120" cy="120" r="110"/>
+          <circle class="ring-inner" cx="120" cy="120" r="96"/>
+          <path id="curveTop" d="M 30,120 A 90,90 0 0 1 210,120" fill="none"/>
+          <path id="curveBottom" d="M 210,125 A 90,90 0 0 1 30,125" fill="none"/>
+          <text><textPath href="#curveTop" startOffset="50%" text-anchor="middle">MELIZA R. CHOC MONTES</textPath></text>
+          <text><textPath href="#curveBottom" startOffset="50%" text-anchor="middle">GUATEMALA, C.A.</textPath></text>
+          <text x="120" y="112" text-anchor="middle" class="center-word">TRADUCTORA</text>
+          <text x="120" y="132" text-anchor="middle" class="center-word">JURADA</text>
+          <text x="120" y="150" text-anchor="middle" class="center-sub">E INTÉRPRETE</text>
+          <polygon class="star" points="120,158 122,163 127,163 123,166 124,171 120,168 116,171 117,166 113,163 118,163"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="servicios">
+    <div class="wrap">
+      <h2>En qué puedo apoyarte</h2>
+      <p class="intro">Servicios pensados para despachos jurídicos, notarías, instituciones y personas que necesitan que un documento diga, en otro idioma, exactamente lo que dice en el original.</p>
+      <div class="service-list">
+        <div class="service-item">
+          <h3>Traducción jurada</h3>
+          <p>Actas, contratos, títulos y documentos oficiales traducidos con validez legal y sello de traductora jurada.</p>
+        </div>
+        <div class="service-item">
+          <h3>Traducción técnica</h3>
+          <p>Manuales, informes y textos especializados que exigen terminología precisa y consistente.</p>
+        </div>
+        <div class="service-item">
+          <h3>Revisión y edición</h3>
+          <p>Corrección de traducciones existentes para asegurar exactitud, tono y coherencia terminológica.</p>
+        </div>
+        <div class="service-item">
+          <h3>Interpretación</h3>
+          <p>Interpretación consecutiva y de enlace para reuniones, capacitaciones y atención a beneficiarios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="about" id="sobre-mi">
+    <div class="wrap">
+      <div class="about-photo">
+        <img src="assets/meliza.jpg" alt="Meliza Choc, traductora jurada e intérprete">
+      </div>
+      <div>
+        <h2>Acerca de mí</h2>
+        <p>Soy traductora jurada e intérprete, radicada en la Ciudad de Guatemala. Trabajo con despachos jurídicos y notarías en la traducción de documentos oficiales, y con instituciones y organizaciones en interpretación de enlace.</p>
+        <p>Antes de dedicarme de tiempo completo a la traducción, trabajé como maestra de inglés en el Instituto Guatemalteco Americano, y actualmente sigo activa como intérprete freelance, incluyendo colaboraciones con Food For The Hungry. Estoy terminando la licenciatura en Traducción e Interpretación en la Universidad Mariano Gálvez, lo que me permite combinar formación académica con experiencia de campo.</p>
+        <dl class="about-facts">
+          <div><dt>Ubicación</dt><dd>Ciudad de Guatemala</dd></div>
+          <div><dt>Idiomas</dt><dd>Español · Inglés</dd></div>
+          <div><dt>Enfoque</dt><dd>Legal y notarial</dd></div>
+          <div><dt>Formación</dt><dd>Lic. en Traducción e Interpretación, UMG (en curso)</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAFOLIO -->
+  <section class="portafolio" id="portafolio">
+    <div class="wrap">
+      <h2>Portafolio</h2>
+      <p class="intro">Tipos de documentos y proyectos en los que suelo trabajar. Por confidencialidad de mis clientes, las muestras completas están disponibles bajo petición.</p>
+      <div class="doc-grid">
+        <div class="doc-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>
+          <h4>Actas y certificados</h4>
+          <p>Nacimiento, matrimonio y antecedentes, con formato listo para trámite.</p>
+        </div>
+        <div class="doc-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>
+          <h4>Contratos legales</h4>
+          <p>Acuerdos comerciales y contratos civiles con terminología jurídica precisa.</p>
+        </div>
+        <div class="doc-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4-8 4-8-4z"/><path d="M4 11v6l8 4 8-4v-6"/></svg>
+          <h4>Diplomas y expedientes académicos</h4>
+          <p>Títulos, cierres de pénsum y constancias de estudio para trámites en el extranjero.</p>
+        </div>
+        <div class="doc-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M5 21c1-4 4-6 7-6s6 2 7 6"/></svg>
+          <h4>Interpretación de enlace</h4>
+          <p>Acompañamiento en reuniones, capacitaciones y atención directa a beneficiarios.</p>
+        </div>
+      </div>
+      <p class="confid-note">¿Necesitas ver ejemplos de trabajos anteriores para tu caso específico? Escríbeme y con gusto comparto muestras relevantes, respetando la confidencialidad de cada cliente.</p>
+    </div>
+  </section>
+
+  <!-- CURRÍCULUM -->
+  <section class="cv" id="curriculum">
+    <div class="wrap">
+      <h2>Currículum</h2>
+      <div class="cv-grid">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">En curso</div>
+            <h3>Licenciatura en Traducción e Interpretación</h3>
+            <p>Universidad Mariano Gálvez de Guatemala.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Actualidad</div>
+            <h3>Traductora jurada e intérprete freelance</h3>
+            <p>Servicios de traducción jurada y técnica para clientes legales y notariales; interpretación de enlace, incluyendo colaboraciones con Food For The Hungry.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">Experiencia previa</div>
+            <h3>Maestra de inglés</h3>
+            <p>Instituto Guatemalteco Americano (IGA).</p>
+          </div>
+        </div>
+        <div class="skills">
+          <div class="skill-block">
+            <h3>Idiomas</h3>
+            <div class="tag-row">
+              <span class="tag">Español — nativo</span>
+              <span class="tag">Inglés — avanzado</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h3>Áreas de especialidad</h3>
+            <div class="tag-row">
+              <span class="tag">Documentos legales</span>
+              <span class="tag">Documentos notariales</span>
+              <span class="tag">Educación</span>
+              <span class="tag">Cooperación / ONG</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h3>Modalidad</h3>
+            <div class="tag-row">
+              <span class="tag">Presencial en Ciudad de Guatemala</span>
+              <span class="tag">Remoto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <h2>Conversemos sobre tu documento</h2>
+      <p class="intro">Cuéntame qué necesitas traducir o interpretar, y te respondo con un tiempo estimado y una cotización.</p>
+      <div class="contact-grid">
+        <ul class="contact-list">
+          <li>
+            <div class="label">Teléfono / WhatsApp</div>
+            <div class="value"><a href="https://wa.me/50241108457" target="_blank" rel="noopener">(502) 4110-8457</a></div>
+          </li>
+          <li>
+            <div class="label">Correo</div>
+            <div class="value"><a href="mailto:chocmmeliza@gmail.com">chocmmeliza@gmail.com</a></div>
+          </li>
+          <li>
+            <div class="label">LinkedIn</div>
+            <div class="value"><a href="https://linkedin.com/in/meliza-choc" target="_blank" rel="noopener">linkedin.com/in/meliza-choc</a></div>
+          </li>
+          <li>
+            <div class="label">Sitio web</div>
+            <div class="value">melizachoc.com</div>
+          </li>
+        </ul>
+        <form class="contact-form" id="contactForm">
+          <div>
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
+          </div>
+          <div>
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" placeholder="tu@correo.com" required>
+          </div>
+          <div>
+            <label for="mensaje">Cuéntame sobre tu documento</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Tipo de documento, idioma y fecha en la que lo necesitas"></textarea>
+          </div>
+          <button type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Meliza R. Choc Montes · Traductora Jurada e Intérprete · Guatemala
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Simple contact form: opens the user's email client with the message pre-filled.
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const mensaje = document.getElementById('mensaje').value;
+    const subject = encodeURIComponent('Solicitud de traducción — ' + nombre);
+    const body = encodeURIComponent(mensaje + '\n\nCorreo de contacto: ' + correo);
+    window.location.href = 'mailto:chocmmeliza@gmail.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
