@@ -9,6 +9,12 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- TEMPORAL: /en/ está en noindex mientras la traducción es un borrador.
-       Restaurar esta entrada al aprobarse el texto en inglés. -->
+  <url>
+    <loc>https://melizachoc.github.io/webpersonal/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://melizachoc.github.io/webpersonal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://melizachoc.github.io/webpersonal/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://melizachoc.github.io/webpersonal/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

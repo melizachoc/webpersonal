@@ -69,9 +69,15 @@ languages together. Grep before declaring it done.
 ## The English page is a work sample
 
 The site is the portfolio of an ES↔EN translator, so its English copy is itself a demonstration of her
-work. Never publish machine-translated or unreviewed English. Draft it, mark it, and route it to
-Meliza for approval — `en/index.html` carries a comment block listing the terminology choices awaiting
-her confirmation.
+work. **Never publish machine-translated or unreviewed English.** Any change to `en/index.html` copy —
+including a one-word tweak — goes to Meliza for approval before it ships.
+
+The workflow when English copy is in draft: mark the block with an HTML comment listing the
+terminology choices awaiting her decision, add `<meta name="robots" content="noindex">` to the page,
+and drop its `<url>` entry from `sitemap.xml` so an unreviewed translation cannot be indexed. On
+approval, reverse all three. The current English text was approved on 2026-09-09; the terminology she
+signed off on includes "sworn translator", "certificate of completed coursework" (cierre de pénsum)
+and "police clearance certificate" (antecedentes).
 
 ## Deploying / changing the domain
 
