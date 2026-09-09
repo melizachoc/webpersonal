@@ -11,6 +11,8 @@ search and get the visitor into a WhatsApp conversation.
 - `index.html` — Spanish (primary)
 - `en/index.html` — English
 
+Live at **https://melizachoc.github.io/webpersonal/** (custom domain pending).
+
 There is **no build step, no package manager, no framework**. Deploy = push to `main`; GitHub Pages
 serves the repo root.
 
@@ -60,11 +62,20 @@ behavior change must be made once and verified on both.
 link click / Escape / resize to desktop). No libraries. **There is no contact form and no backend** —
 WhatsApp is the only conversion channel by design.
 
-## Contact details are duplicated
+## Contact details are duplicated — count them before editing
 
-Phone `wa.me/50255612435` appears **6 times per page** (nav CTA, mobile menu CTA, hero button, contact
-list, contact CTA block, floating button) and the email twice. Update every occurrence in **both**
-languages together. Grep before declaring it done.
+There is no template, so the phone and email are repeated across both pages. The phone appears in
+**three different formats**, which is what makes a find-and-replace miss occurrences.
+
+| What | Format | Per page |
+|---|---|---|
+| WhatsApp links | `wa.me/50255612435` | 6 — nav CTA, mobile-menu CTA, hero button, contact list, contact CTA block, floating button |
+| Visible phone text | `(502) 5561-2435` | 1 |
+| JSON-LD `telephone` | `+502-5561-2435` | 1 |
+| Email | `melizachocm@gmail.com` | 5 — contact list (href + text), CTA note (href + text), JSON-LD |
+
+Times two languages, a phone change touches **16 places** and an email change **10**. Verify with a
+grep for each format, in both files, before calling it done.
 
 ## The English page is a work sample
 
@@ -79,10 +90,49 @@ approval, reverse all three. The current English text was approved on 2026-09-09
 signed off on includes "sworn translator", "certificate of completed coursework" (cierre de pénsum)
 and "police clearance certificate" (antecedentes).
 
+## Regenerating the seal-derived images
+
+`favicon.svg` is hand-written and shipped as-is. `og-image.png` (1200×630) and `apple-touch-icon.png`
+(180×180) are rendered from the sources in `assets/img/src/`. Keep those sources in sync with the seal.
+
+The only renderer assumed present on macOS is `qlmanage`, and it has two traps worth knowing before
+you fight it:
+
+- **It scales to the *shorter* dimension and crops the rest.** Rendering a 1200×630 SVG directly gives
+  a zoomed, cropped image. That is why `src/og-image.svg` is a **1200×1200 square** with the real
+  design placed in a `translate(0,285)` band — render the square, then crop the middle 630 rows.
+- **It renders unreliably at small sizes.** `apple-touch-icon.svg` is authored at 720×720 and
+  downscaled, not authored at 180.
+
+```bash
+SP=$(mktemp -d)
+qlmanage -t -s 1200 -o "$SP" assets/img/src/og-image.svg
+sips -c 630 1200 "$SP/og-image.svg.png" --out assets/img/og-image.png       # crop to 1200x630
+
+qlmanage -t -s 720 -o "$SP" assets/img/src/apple-touch-icon.svg
+sips -z 180 180 "$SP/apple-touch-icon.svg.png" --out assets/img/apple-touch-icon.png
+```
+
+Always open the result and look at it — both traps produce a *valid* PNG of the wrong thing. Fonts are
+system fallbacks (Georgia, Helvetica), not the web fonts, since the renderer has no network.
+
 ## Deploying / changing the domain
 
-Pages is set to *Deploy from a branch* → `main` → `/ (root)`. Every push to `main` is a production
-release, so work on a branch and open a PR.
+Pages is set to *Deploy from a branch* → `main` → `/ (root)`, HTTPS enforced. Every push to `main` is a
+production release, so work on a branch and open a PR.
+
+**Changing Pages settings requires repo admin, which only Meliza (`melizachoc`) has.** Collaborators
+have push but not admin, so anything under Settings → Pages has to go through her.
+
+After a merge, Pages takes ~30-60s to rebuild. Confirm the deploy actually shipped rather than assuming:
+
+```bash
+gh api repos/melizachoc/webpersonal/pages/builds/latest \
+  --jq '{status, commit: .commit[0:7], error: .error.message}'
+```
+
+`status: built` with the commit you expect. A green merge is not a deploy — this repo has already been
+live on a stale commit once, serving an outdated phone number.
 
 When the custom domain is bought, swap the absolute URL in exactly these places, add a `CNAME` file at
 the root, point DNS at GitHub, and enable *Enforce HTTPS*:
