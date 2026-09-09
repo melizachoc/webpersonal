@@ -1,0 +1,295 @@
+/* =========================================================
+   Meliza R. Choc Montes — Traductora Jurada e Intérprete
+   Hoja de estilos compartida por la versión ES (/) y EN (/en/).
+   Los bloques siguen el mismo orden que las <section> del HTML.
+   ========================================================= */
+
+:root{
+  --maroon: #8A2C49;
+  --maroon-deep: #631F35;
+
+  /* Olivo: tres variantes por contraste.
+     --olive       decorativo (bordes, filetes). Sin requisito de contraste.
+     --olive-ink   texto sobre fondo claro. 4.86:1 s/blanco, 4.65:1 s/crema.
+     --olive-light texto sobre granate.       4.98:1 s/--maroon-deep.
+     El --olive original daba 2.53:1 sobre crema y no cumplía WCAG AA. */
+  --olive: #A79B6E;
+  --olive-ink: #7D7145;
+  --olive-light: #B5A87C;
+
+  --cream: #FBF3EA;
+  --paper: #FFFFFF;
+  --ink: #2B2420;
+  --ink-soft: #6B615A;
+  --line: #E6DACB;
+  --radius: 3px;
+  --wrap: 1120px;
+  --wa: #25D366;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display', Georgia, 'Times New Roman', serif;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px;}
+section{padding:96px 0;}
+@media (max-width:720px){ section{padding:64px 0;} }
+
+/* Foco visible para navegación con teclado. */
+:focus-visible{outline:2px solid var(--maroon); outline-offset:3px;}
+.contacto :focus-visible, .wa-float:focus-visible, .nav-cta:focus-visible{outline-color:var(--cream);}
+.wa-float:focus-visible{outline-offset:4px;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.01ms !important; animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+.skip-link{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--maroon); color:var(--cream);
+  padding:12px 22px; font-size:0.95rem;
+}
+.skip-link:focus{left:0;}
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ---------- NAV ---------- */
+header.site-nav{
+  position:sticky; top:0; z-index:40;
+  background:rgba(251,243,234,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--wrap); margin:0 auto; padding:18px 28px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.brand{font-family:'Playfair Display', Georgia, serif; font-weight:600; font-size:1.25rem; color:var(--maroon-deep); letter-spacing:0.01em; white-space:nowrap;}
+.brand span{color:var(--ink);}
+nav.links{display:flex; align-items:center; gap:30px; font-size:0.95rem; color:var(--ink-soft);}
+nav.links a:hover{color:var(--maroon);}
+.nav-right{display:flex; align-items:center; gap:18px;}
+
+/* Selector de idioma */
+.lang-switch{display:flex; align-items:center; gap:7px; font-size:0.85rem; letter-spacing:0.04em;}
+.lang-switch .current{color:var(--maroon-deep); font-weight:600;}
+.lang-switch .sep{color:var(--line);}
+.lang-switch a{color:var(--ink-soft);}
+.lang-switch a:hover{color:var(--maroon);}
+
+.nav-cta{
+  background:var(--maroon); color:var(--cream); padding:10px 20px;
+  border-radius:var(--radius); font-size:0.9rem; font-weight:500;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--maroon-deep); color:var(--cream);}
+.burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.burger span{width:24px; height:2px; background:var(--ink); display:block;}
+
+@media (max-width:860px){
+  nav.links{
+    position:absolute; top:100%; left:0; right:0;
+    background:var(--paper); flex-direction:column; align-items:stretch; gap:0;
+    max-height:0; overflow:hidden;
+    /* visibility evita que los enlaces sigan siendo enfocables con Tab
+       mientras el menú está cerrado; se retrasa hasta terminar la animación. */
+    visibility:hidden;
+    transition:max-height .25s ease, visibility 0s linear .25s;
+    border-bottom:1px solid var(--line);
+  }
+  nav.links.open{
+    max-height:420px; visibility:visible;
+    transition:max-height .25s ease, visibility 0s linear 0s;
+  }
+  nav.links a{padding:14px 28px; border-top:1px solid var(--line);}
+  .nav-menu-cta{color:var(--maroon-deep); font-weight:600;}
+  .burger{display:flex;}
+  .nav-right .nav-cta{display:none;}
+  .lang-switch{margin-left:auto;}
+}
+/* En escritorio el WhatsApp del menú desplegable sobra: ya está el botón del nav. */
+@media (min-width:861px){ .nav-menu-cta{display:none;} }
+
+/* ---------- BOTÓN FLOTANTE DE WHATSAPP (solo móvil) ----------
+   El nav-cta se oculta en <=860px, así que sin esto el único camino de
+   conversión del sitio queda invisible en el dispositivo mayoritario. */
+.wa-float{
+  display:none;
+  position:fixed; right:16px; bottom:16px; z-index:50;
+  align-items:center; gap:9px;
+  background:var(--maroon); color:var(--cream);
+  padding:13px 20px; border-radius:999px;
+  font-size:0.95rem; font-weight:600;
+  box-shadow:0 6px 20px rgba(43,36,32,0.28);
+}
+.wa-float:hover{background:var(--maroon-deep); color:var(--cream);}
+.wa-float svg{width:20px; height:20px; fill:currentColor; flex:none;}
+@media (max-width:860px){
+  .wa-float{display:flex;}
+  /* Aire al final para que el botón no tape el pie de página. */
+  footer{padding-bottom:96px;}
+}
+
+/* ---------- HERO ---------- */
+.hero{padding:88px 0 70px;}
+.hero .wrap{
+  display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
+}
+@media (max-width:860px){ .hero .wrap{grid-template-columns:1fr; text-align:center;} }
+.hero h1{
+  font-size:clamp(2.1rem, 4vw, 3.1rem);
+  font-weight:600; line-height:1.15; color:var(--ink);
+  max-width:15ch;
+}
+@media (max-width:860px){ .hero h1{max-width:none; margin:0 auto;} }
+.hero p.lede{
+  margin-top:22px; font-size:1.08rem; color:var(--ink-soft); max-width:46ch;
+}
+@media (max-width:860px){ .hero p.lede{margin-left:auto; margin-right:auto;} }
+.hero .cta-row{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;}
+@media (max-width:860px){ .hero .cta-row{justify-content:center;} }
+.btn{
+  display:inline-flex; align-items:center; gap:9px;
+  padding:13px 26px; border-radius:var(--radius);
+  font-size:0.95rem; font-weight:500; border:1px solid transparent;
+}
+.btn svg{width:18px; height:18px; fill:currentColor; flex:none;}
+.btn-primary{background:var(--maroon); color:var(--cream);}
+.btn-primary:hover{background:var(--maroon-deep);}
+.btn-ghost{border-color:var(--ink); color:var(--ink);}
+.btn-ghost:hover{border-color:var(--maroon); color:var(--maroon);}
+
+/* El sello — el único elemento rotundo y memorable. */
+.seal-wrap{display:flex; justify-content:center;}
+.seal{width:min(300px, 78vw); height:auto;}
+.seal .ring{fill:none; stroke:var(--maroon); stroke-width:2;}
+.seal .ring-inner{fill:none; stroke:var(--olive); stroke-width:1;}
+.seal text{
+  font-family:'Playfair Display', Georgia, serif; fill:var(--maroon-deep);
+  font-size:11.5px; letter-spacing:2.2px;
+}
+.seal .center-word{font-size:15px; font-weight:600;}
+.seal .center-sub{font-family:'Inter', sans-serif; font-size:8.5px; letter-spacing:1.5px; fill:var(--ink-soft);}
+.seal .star{fill:var(--olive);}
+
+/* ---------- SERVICIOS ---------- */
+.servicios{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.servicios h2{font-size:1.9rem; max-width:20ch;}
+.servicios .intro{color:var(--ink-soft); max-width:56ch; margin-top:14px;}
+.service-list{margin-top:48px; display:grid; grid-template-columns:repeat(2,1fr); gap:0;}
+@media (max-width:720px){ .service-list{grid-template-columns:1fr;} }
+.service-item{
+  position:relative; padding:30px 28px 30px 34px;
+  border-top:1px solid var(--line);
+}
+.service-item::before{
+  content:""; position:absolute; left:0; top:30px; bottom:30px; width:3px;
+  background:var(--maroon);
+}
+.service-item h3{font-size:1.15rem; font-weight:600; color:var(--maroon-deep);}
+.service-item p{margin-top:8px; color:var(--ink-soft); font-size:0.96rem; max-width:38ch;}
+
+/* ---------- SOBRE MÍ ---------- */
+.about .wrap{display:grid; grid-template-columns:1.25fr 0.75fr; gap:60px; align-items:start;}
+@media (max-width:860px){ .about .wrap{grid-template-columns:1fr; gap:38px;} }
+.about h2{font-size:1.9rem;}
+.about p{margin-top:18px; color:var(--ink-soft); max-width:62ch;}
+.about-facts{
+  border:1px solid var(--line); background:var(--paper);
+  padding:28px 26px; display:grid; gap:20px;
+}
+.about-facts dt{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--olive-ink); font-weight:600;}
+.about-facts dd{margin-top:4px; font-size:0.98rem; color:var(--ink);}
+@media (max-width:860px){ .about-facts{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:480px){ .about-facts{grid-template-columns:1fr;} }
+
+/* ---------- PORTAFOLIO ---------- */
+.portafolio{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.portafolio h2{font-size:1.9rem;}
+.portafolio .intro{color:var(--ink-soft); max-width:60ch; margin-top:14px;}
+.doc-grid{margin-top:46px; display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+@media (max-width:860px){ .doc-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:480px){ .doc-grid{grid-template-columns:1fr;} }
+.doc-card{
+  background:var(--cream); border:1px solid var(--line);
+  padding:26px 20px; text-align:left;
+}
+.doc-card svg{width:30px; height:30px; stroke:var(--maroon);}
+.doc-card h4{margin-top:16px; font-size:1rem; font-weight:600; color:var(--ink);}
+.doc-card p{margin-top:6px; font-size:0.86rem; color:var(--ink-soft);}
+.confid-note{
+  margin-top:34px; font-size:0.9rem; color:var(--ink-soft);
+  border-left:3px solid var(--olive); padding-left:16px;
+}
+
+/* ---------- CURRÍCULUM ---------- */
+.cv h2{font-size:1.9rem;}
+.cv-grid{margin-top:48px; display:grid; grid-template-columns:1.3fr 1fr; gap:60px;}
+@media (max-width:860px){ .cv-grid{grid-template-columns:1fr;} }
+.timeline{border-left:1px solid var(--line); padding-left:30px;}
+.tl-item{position:relative; padding-bottom:38px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:""; position:absolute; left:-35px; top:4px;
+  width:9px; height:9px; border-radius:50%; background:var(--maroon);
+}
+.tl-year{font-size:0.82rem; color:var(--olive-ink); font-weight:600; letter-spacing:0.03em;}
+.tl-item h3{margin-top:4px; font-size:1.08rem; font-weight:600;}
+.tl-item p{margin-top:6px; color:var(--ink-soft); font-size:0.95rem; max-width:44ch;}
+.skills h3{font-size:1.05rem; font-weight:600; color:var(--maroon-deep); margin-bottom:14px;}
+.skill-block{margin-bottom:26px;}
+.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+.tag{
+  font-size:0.82rem; padding:6px 13px; border:1px solid var(--line);
+  background:var(--paper); color:var(--ink-soft);
+}
+
+/* ---------- CONTACTO ---------- */
+.contacto{background:var(--maroon-deep); color:var(--cream);}
+.contacto h2{color:var(--cream); font-size:1.9rem;}
+.contacto .intro{color:#E7C9D2; max-width:52ch; margin-top:14px;}
+.contact-grid{margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+@media (max-width:860px){ .contact-grid{grid-template-columns:1fr; gap:40px;} }
+.contact-list{list-style:none;}
+.contact-list li{padding:16px 0; border-top:1px solid rgba(255,255,255,0.18);}
+.contact-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.18);}
+.contact-list .label{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--olive-light);}
+.contact-list .value{margin-top:4px; font-size:1.05rem;}
+.contact-list a:hover{color:var(--olive-light);}
+
+/* Bloque de llamada a la acción que sustituye al antiguo formulario. */
+.contact-cta{
+  border:1px solid rgba(255,255,255,0.22);
+  padding:34px 30px;
+  background:rgba(255,255,255,0.04);
+}
+.contact-cta h3{font-size:1.35rem; color:var(--cream);}
+.contact-cta p{margin-top:12px; color:#E7C9D2; font-size:0.98rem; max-width:40ch;}
+.btn-wa{
+  margin-top:26px;
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--cream); color:var(--maroon-deep);
+  padding:15px 30px; border-radius:var(--radius);
+  font-weight:600; font-size:1rem;
+}
+.btn-wa:hover{background:var(--olive-light); color:var(--maroon-deep);}
+.btn-wa svg{width:20px; height:20px; fill:currentColor; flex:none;}
+.cta-note{margin-top:18px; font-size:0.88rem; color:#E7C9D2;}
+
+/* ---------- FOOTER ---------- */
+footer{padding:34px 0; text-align:center; font-size:0.85rem; color:var(--ink-soft);}

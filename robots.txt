@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://melizachoc.github.io/webpersonal/sitemap.xml
