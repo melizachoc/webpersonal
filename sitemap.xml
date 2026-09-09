@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://melizachoc.github.io/webpersonal/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://melizachoc.github.io/webpersonal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://melizachoc.github.io/webpersonal/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://melizachoc.github.io/webpersonal/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- TEMPORAL: /en/ está en noindex mientras la traducción es un borrador.
+       Restaurar esta entrada al aprobarse el texto en inglés. -->
+</urlset>
