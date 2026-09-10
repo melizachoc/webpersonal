@@ -16,6 +16,23 @@ Live at **https://melizachoc.github.io/webpersonal/** (custom domain pending).
 There is **no build step, no package manager, no framework**. Deploy = push to `main`; GitHub Pages
 serves the repo root.
 
+## Decisions already settled — don't relitigate these
+
+These were argued through and decided. Reopen one only if the user asks, or if a new fact actually
+changes the trade-off.
+
+- **No React, no SPA.** The site's job is being found in search and loading instantly on a phone.
+  Shipping an empty shell plus a bundle to render static content works against both, and Pages would
+  need a build and the `404.html` routing hack. If a framework is ever warranted, the target is
+  **Astro** — static-first, zero JS by default, and it can reuse this HTML/CSS nearly as-is.
+- **When to revisit that:** a blog, or when maintaining the same copy in two hand-edited language
+  files starts causing real mistakes. Neither is true yet at two pages.
+- **WhatsApp is the only conversion channel, deliberately.** The old `mailto:` form silently lost
+  leads on phones with no mail client configured. Don't reintroduce a form without a real backend.
+- **No photo in "Acerca de mí".** The original markup pointed at an `assets/meliza.jpg` that never
+  existed in the repo, so it rendered broken. The section was rebuilt as text plus a facts card. If
+  Meliza supplies a photo, that layout is where it goes back.
+
 ## Running it
 
 ```bash
@@ -43,8 +60,10 @@ behavior change must be made once and verified on both.
   Breakpoints: 860px (grids collapse, burger appears), 720px, 480px.
 - **Section `id`s are shared across languages** (`sobre-mi`, `portafolio`, `curriculum`, `contacto`) so
   the CSS and JS stay identical. Only the visible link text is translated.
-- **The seal** is a hand-built inline SVG in the hero. It is the site's signature element and the
-  source for `favicon.svg` and `og-image.png`. Treat changes to it as a design decision.
+- **The seal** is a hand-built inline SVG and the site's signature element. Treat changes to it as a
+  design decision, and remember it lives in five files: the full seal in `index.html`,
+  `en/index.html` and `assets/img/src/og-image.svg`, plus a simplified **MC** monogram derived from it
+  in `assets/img/favicon.svg` and `assets/img/src/apple-touch-icon.svg`.
 
 ### Three colors of olive
 
@@ -138,3 +157,37 @@ When the custom domain is bought, swap the absolute URL in exactly these places,
 the root, point DNS at GitHub, and enable *Enforce HTTPS*:
 `index.html` and `en/index.html` (canonical, `og:url`, 3× `hreflang`, JSON-LD `url`), `sitemap.xml`,
 `robots.txt`, `404.html`. Relative paths need no changes.
+
+## State of play — read this before picking up new work
+
+The MVP shipped on 2026-09-09 and is live. What follows is what a fresh session needs and cannot infer
+from the code.
+
+### Never verified
+
+- **Nothing has been checked in a real browser.** Everything green so far is network and content
+  checks: correct files served, correct data inside them, links resolving, valid JSON-LD. That says
+  nothing about how the page *looks* or whether interactions work. The two elements built in this
+  round and never seen running are the **floating WhatsApp button** (mobile only, ≤860px) and the
+  **burger menu**. Check those first on a real phone. No Lighthouse run exists either.
+- **The LinkedIn URL `linkedin.com/in/meliza-choc`** was inherited from the original file and has
+  never been confirmed to resolve. It occurs 3× per page — `href`, visible text, and JSON-LD
+  `sameAs` — so 6 in total if it needs correcting.
+
+### Deliberately deferred to a later round
+
+Scoped out of the MVP to ship faster, not rejected. All of these were discussed with the user:
+
+- **"Cómo trabajo" / process section** — send the document, get a quote and a date, receive the
+  translation. Lowers the friction of starting a WhatsApp conversation.
+- **FAQ** — turnaround times, whether the seal is valid abroad, apostille, accepted formats. The
+  strongest long-tail SEO addition available here, and it answers the questions Meliza otherwise
+  fields one at a time.
+- **Testimonials** — needs 2-3 real quotes from clients first; don't build the section before they
+  exist.
+- **Indicative pricing** — filters out non-serious enquiries, but commits to a public number, so it
+  is Meliza's call, not a technical one.
+- **Analytics (GA4).**
+
+Adding the first two roughly doubles the copy kept in sync by hand across ES and EN. That is the
+concrete point at which the Astro question in *Decisions already settled* is worth reopening.
